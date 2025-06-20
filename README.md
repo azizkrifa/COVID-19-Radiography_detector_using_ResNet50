@@ -25,7 +25,6 @@ The goal is to assist radiologists and healthcare professionals in making quicke
 - ✅ EarlyStopping and ModelCheckpoint callbacks for efficient training
 - ✅ Visualization of training/validation accuracy and loss
 - ✅ Final model export (`.h5`) and training history logging (`.pkl`)
-- ![Sans titre](https://github.com/user-attachments/assets/adfbf6e4-c1d0-4e93-8482-0fd2d50f14c9)
 
 - ✅ Test set evaluation and confusion matrix visualization
 
@@ -95,5 +94,8 @@ pip install -r requirements.txt
 - best_model.h5
 - history.pkl
 - training_metrics.png
+
+- ![Some predictions ](https://github.com/user-attachments/assets/adfbf6e4-c1d0-4e93-8482-0fd2d50f14c9)
+
 
 
