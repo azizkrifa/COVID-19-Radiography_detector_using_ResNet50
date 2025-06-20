@@ -93,7 +93,7 @@ pip install -r requirements.txt
 
 - best_model.h5
 - history.pkl
-- training_metrics.png
+- Classification_Report.png
 
 ## Some predictions
 ![Some predictions ](https://github.com/user-attachments/assets/adfbf6e4-c1d0-4e93-8482-0fd2d50f14c9)
