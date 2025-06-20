@@ -79,24 +79,19 @@ cd COVID19-Radiography-Detector
 # Install dependencies
 pip install -r requirements.txt
 
-#load the data (split + augmentation) by running  1_data_preprocessing.ipynb
+#1-load the data (split + augmentation) by running  1_data_preprocessing.ipynb
 
-# Train the model by running  2_training.ipynb
+#2-Train the model by running  2_training.ipynb
 
+#3-Evaluate the model by running 3_evaluation.ipynb
 
-# Evaluate the model by running 3_evaluation.ipynb
-
-```
-
----
 
 ## 📁 Final Artifacts Location
 
-```
 ✅ Check the output folder where you will find the final model + training history (accuracy and loss):
 
 - best_model.h5
 - history.pkl
 - training_metrics.png
-```
+
 
