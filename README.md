@@ -95,7 +95,8 @@ pip install -r requirements.txt
 - history.pkl
 - training_metrics.png
 
-- ![Some predictions ](https://github.com/user-attachments/assets/adfbf6e4-c1d0-4e93-8482-0fd2d50f14c9)
+## Some predictions
+![Some predictions ](https://github.com/user-attachments/assets/adfbf6e4-c1d0-4e93-8482-0fd2d50f14c9)
 
 
 
