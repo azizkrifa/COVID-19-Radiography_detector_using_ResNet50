@@ -72,7 +72,6 @@ The goal is to assist radiologists and healthcare professionals in making quicke
 
 ## 🚀 How to Run
 
-```bash
 # Clone repo
 git clone https://github.com/azizkrifa/COVID-19-Radiography_detector.git
 cd COVID19-Radiography-Detector
@@ -94,7 +93,7 @@ pip install -r requirements.txt
 ## 📁 Final Artifacts Location
 
 ```
-✅ Here is where you will find the final model + training history (accuracy and loss):
+✅ Check the output folder where you will find the final model + training history (accuracy and loss):
 
 - best_model.h5
 - history.pkl
