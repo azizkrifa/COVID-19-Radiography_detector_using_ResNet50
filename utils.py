@@ -1,6 +1,8 @@
 from tensorflow.keras.preprocessing.image import ImageDataGenerator ,load_img, img_to_array
 from sklearn.metrics import classification_report, confusion_matrix
 import matplotlib.pyplot as plt
+import pandas as pd
+import seaborn as sns
 import os
 import random
 import numpy as np
@@ -122,21 +124,27 @@ def visualize_test_predictons(model):
     plt.show()
 
 
-def visualize_accuracy_loss(history):
+def visualize_accuracy_loss():
+
+    # Load the saved history from file
+    history = pd.read_csv("training_log.csv")
+
+    plt.figure(figsize=(14, 5))
+
     # Plot Accuracy
     plt.subplot(1, 2, 1)
-    plt.plot(history.history['accuracy'], label='Train Acc', marker='o')
-    plt.plot(history.history['val_accuracy'], label='Val Acc', marker='o')
+    plt.plot(history['accuracy'], label='Train Accuracy', marker='o')
+    plt.plot(history['val_accuracy'], label='Val Accuracy', marker='o')
     plt.title('Training vs Validation Accuracy')
     plt.xlabel('Epoch')
     plt.ylabel('Accuracy')
     plt.legend()
     plt.grid(True)
 
-    #Plot Loss
+    # Plot Loss
     plt.subplot(1, 2, 2)
-    plt.plot(history.history['loss'], label='Train Loss', marker='o')
-    plt.plot(history.history['val_loss'], label='Val Loss', marker='o')
+    plt.plot(history['loss'], label='Train Loss', marker='o')
+    plt.plot(history['val_loss'], label='Val Loss', marker='o')
     plt.title('Training vs Validation Loss')
     plt.xlabel('Epoch')
     plt.ylabel('Loss')
@@ -145,27 +153,44 @@ def visualize_accuracy_loss(history):
 
     plt.tight_layout()
 
-    plt.savefig("/output", dpi=300, bbox_inches='tight')
-    print(f"✅ Figure saved to output") #save to output folder
+    plt.savefig("/output/Training_History.png", dpi=300, bbox_inches='tight')
+    print(f"✅ Figure saved to output folder") 
 
     plt.show()
 
 def classification_report(model, test_generator):
     
     # Get true labels and predictions
-    y_true = test_generator.classes
-    y_pred = model.predict(test_generator)
-    y_pred_classes = np.argmax(y_pred, axis=1)
+    Y_true = test_generator.classes
+    Y_pred_probs = model.predict(test_generator)
+    Y_pred = np.argmax(Y_pred_probs, axis=1)
+
+    # Get class labels
+    class_labels = list(test_generator.class_indices.keys())
 
     # Generate classification report
-    report = classification_report(y_true, y_pred_classes, target_names=test_generator.class_indices.keys())
-    
+    report = classification_report(Y_true, Y_pred, target_names=class_labels)
     print("Classification Report:")
     print(report)
 
-    cm = confusion_matrix(y_true, y_pred_classes)
-    
-    print("Confusion Matrix:")
-    print(cm)
+    # Generate confusion matrix
+    cm = confusion_matrix(Y_true, Y_pred)
+
+    # Plot confusion matrix as heatmap
+    plt.figure(figsize=(8, 6))
+    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
+                xticklabels=class_labels,
+                yticklabels=class_labels)
+
+    plt.title('Confusion Matrix')
+    plt.xlabel('Predicted Label')
+    plt.ylabel('True Label')
+    plt.tight_layout()
+
+    plt.savefig("/output/confusion_matrix.png", dpi=300, bbox_inches='tight')
+    print(f"✅ Figure saved to output folder") 
+
+    plt.show()
+
 
    
