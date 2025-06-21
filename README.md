@@ -92,8 +92,9 @@ pip install -r requirements.txt
 ✅ Check the output folder where you will find the final model + training history (accuracy and loss):
 
 - best_model.h5
-- history.pkl
+- history.png
 - Classification_Report.png
+- Confusion_matrix.png
 
 ## Some predictions
 ![Some predictions ](https://github.com/user-attachments/assets/adfbf6e4-c1d0-4e93-8482-0fd2d50f14c9)
