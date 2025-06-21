@@ -89,12 +89,12 @@ pip install -r requirements.txt
 
 ## 📁 Final Artifacts Location
 
-✅ Check the output folder where you will find the final model + training history (accuracy and loss):
+✅ Check the output folder where you will find:
 
 - best_model.h5
-- history.png
-- Classification_Report.png
-- Confusion_matrix.png
+- training_history(accuracy and loss)
+- Classification_Report
+- Confusion_matrix
 
 ## Some predictions
 ![Some predictions ](https://github.com/user-attachments/assets/adfbf6e4-c1d0-4e93-8482-0fd2d50f14c9)
