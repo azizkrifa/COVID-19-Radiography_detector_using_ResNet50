@@ -100,7 +100,8 @@ pip install -r requirements.txt
 ![Some predictions ](https://github.com/user-attachments/assets/adfbf6e4-c1d0-4e93-8482-0fd2d50f14c9)
 
 ## Classification Report 
-  ![Classification_Report](https://github.com/user-attachments/assets/050e12c5-3b40-45e7-915d-1a8cee21fa83)
+ ![Classification_Report](https://github.com/user-attachments/assets/4cd0db26-04af-4aab-89ee-4ffe643eb6cb)
+
 
 
 
