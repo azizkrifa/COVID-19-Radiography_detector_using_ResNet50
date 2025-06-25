@@ -24,7 +24,7 @@ The goal is to assist radiologists and healthcare professionals in making quicke
 - ✅ CNN model built on top of pre-trained architectures (`ResNet50`)
 - ✅ EarlyStopping and ModelCheckpoint callbacks for efficient training
 - ✅ Visualization of training/validation accuracy and loss
-- ✅ Final model export (`.h5`) and training history logging (`.pkl`)
+- ✅ Final model export (`.h5`) and training history logging
 
 - ✅ Test set evaluation and confusion matrix visualization
 
