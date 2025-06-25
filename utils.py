@@ -38,7 +38,26 @@ def load_data():
 
     return train_generator, val_generator
 
+def display_data_distribuation(path):
+   
+    # Count images per class
+    train_path = "/content/drive/MyDrive/Datasets/COVID-19_Radiography_Database(splited+no_masks)/"+path
+    train_counts = Counter([
+        label for folder in os.listdir(train_path)
+        if os.path.isdir(os.path.join(train_path, folder))
+        for label in [folder] * len(os.listdir(os.path.join(train_path, folder)))
+    ])
 
+    # Create DataFrame
+    df = pd.DataFrame(train_counts.items(), columns=['Class', 'Count'])
+    df = df.sort_values(by='Count', ascending=False)
+
+    # Plot using Seaborn
+    plt.figure(figsize=(9, 5))
+    sns.barplot(data=df, x='Class', y='Count', palette='viridis')
+    plt.title('Image Count per Class – Train Set')
+    plt.tight_layout()
+    plt.show()
 
 
 def visualize_samples(data_generator):
