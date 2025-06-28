@@ -61,46 +61,65 @@ The goal is to assist radiologists and healthcare professionals in making quicke
 
 ---
 
-## 📊 Outputs
+## 🚀 How to Run
 
-- Final model: `best_model.h5`
-- Training history: `history.pkl`
-- Accuracy/Loss plot: `training_metrics.png`
-- Evaluation metrics on test set (accuracy, confusion matrix, classification report)
+### 📥 1. Clone the Repository
+``` bash 
+    git clone https://github.com/azizkrifa/COVID-19-Radiography_detector.git
+    cd  COVID-19-Radiography_detector
+
+```
+
+### 📦 2. Install Dependencies
+
+``` bash 
+   pip install -r requirements.txt
+``` 
+### 🧪 3. Run the Pipeline Step-by-Step
+
+   ####  🧹 3.1: Data Preparation
+
+  Load and preprocess the dataset (including splitting and augmentation):
+
+    📄 Run: 1_data_preprocessing.ipynb
+
+  ####  🧠 3.2: Train the Model
+
+  Train the model on the prepared dataset:
+
+    📄 Run: 2_training.ipynb
+    
+  #### 📊 3.3: Evaluate the Model
+
+  Evaluate model performance and visualize results:
+
+    📄 Run: 3_evaluation.ipynb
+     
+---
+
+## 📁 Model Outputs & Evaluation Results
+
+The following metrics and visualizations were generated to assess the model’s performance:
+
+- **Training History**: [📁 See `output/training_history.png`]  
+  Shows model accuracy and loss across epochs.
+
+- **Classification Report**: [📁 See `output/classification_report.png`]  
+  High performance across all classes, with a test accuracy of **94%**.
+
+- **Confusion Matrix**: [📁 See `output/confusion_matrix.png`]  
+  Visual breakdown of model predictions vs. actual labels.
+
+- **Trained Model File**: [📁 See `output/best_model.h5`]  
+  The best-performing model saved during training using `ModelCheckpoint`.
+
+➡️  All evaluation outputs and the final model are stored in the `output/` folder.
 
 ---
 
-
-## 🚀 How to Run
-
-# Clone repo
-git clone https://github.com/azizkrifa/COVID-19-Radiography_detector.git
-cd COVID19-Radiography-Detector
-
-# Install dependencies
-pip install -r requirements.txt
-
-#1-load the data (split + augmentation) by running  1_data_preprocessing.ipynb
-
-#2-Train the model by running  2_training.ipynb
-
-#3-Evaluate the model by running 3_evaluation.ipynb
-
-
-## 📁 Final Artifacts Location
-
-✅ Check the output folder where you will find:
-
-- best_model.h5
-- training_history(accuracy and loss)
-- Classification_Report
-- Confusion_matrix
-
-## Some predictions
+## 🔬 Sample Predictions 
 ![Some predictions ](https://github.com/user-attachments/assets/adfbf6e4-c1d0-4e93-8482-0fd2d50f14c9)
 
-## Classification Report 
- ![Classification_Report](https://github.com/user-attachments/assets/4cd0db26-04af-4aab-89ee-4ffe643eb6cb)
 
 
 
