@@ -8,9 +8,31 @@ import random
 import numpy as np
 
 
-def load_data():
+def display_data_distribuation(path):
+   
+    train_counts = Counter([
+        label for folder in os.listdir(path)
+        if os.path.isdir(os.path.join(path, folder))
+        for label in [folder] * len(os.listdir(os.path.join(path, folder)))
+    ])
+
+    # Create DataFrame
+    df = pd.DataFrame(train_counts.items(), columns=['Class', 'Count'])
+    df = df.sort_values(by='Count', ascending=False)
+
+    # Plot using Seaborn
+    plt.figure(figsize=(9, 5))
+    sns.barplot(data=df, x='Class', y='Count', palette='viridis')
+    plt.title('Image Count per Class – Train Set')
+    plt.tight_layout()
+    plt.show()
+
+
+
+def load_data(DATA_DIR):
+    
     # Paths
-    base_dir = "/data"
+    base_dir = f"{DATA_DIR}/dataset"
     train_dir = f"{base_dir}/train_augmented"
     val_dir = f"{base_dir}/val"
 
@@ -38,27 +60,6 @@ def load_data():
 
     return train_generator, val_generator
 
-def display_data_distribuation(path):
-   
-    # Count images per class
-    train_path = "/content/drive/MyDrive/Datasets/COVID-19_Radiography_Database(splited+no_masks)/"+path
-    train_counts = Counter([
-        label for folder in os.listdir(train_path)
-        if os.path.isdir(os.path.join(train_path, folder))
-        for label in [folder] * len(os.listdir(os.path.join(train_path, folder)))
-    ])
-
-    # Create DataFrame
-    df = pd.DataFrame(train_counts.items(), columns=['Class', 'Count'])
-    df = df.sort_values(by='Count', ascending=False)
-
-    # Plot using Seaborn
-    plt.figure(figsize=(9, 5))
-    sns.barplot(data=df, x='Class', y='Count', palette='viridis')
-    plt.title('Image Count per Class – Train Set')
-    plt.tight_layout()
-    plt.show()
-
 
 def visualize_samples(data_generator):
     # Get one batch of images and labels
@@ -82,11 +83,42 @@ def visualize_samples(data_generator):
     plt.tight_layout()
     plt.show()
 
+def visualize_accuracy_loss():
+
+    # Load the saved history from file
+    history = pd.read_csv("training_log.csv")
+
+    plt.figure(figsize=(14, 5))
+
+    # Plot Accuracy
+    plt.subplot(1, 2, 1)
+    plt.plot(history['accuracy'], label='Train Accuracy', marker='o')
+    plt.plot(history['val_accuracy'], label='Val Accuracy', marker='o')
+    plt.title('Training vs Validation Accuracy')
+    plt.xlabel('Epoch')
+    plt.ylabel('Accuracy')
+    plt.legend()
+    plt.grid(True)
+
+    # Plot Loss
+    plt.subplot(1, 2, 2)
+    plt.plot(history['loss'], label='Train Loss', marker='o')
+    plt.plot(history['val_loss'], label='Val Loss', marker='o')
+    plt.title('Training vs Validation Loss')
+    plt.xlabel('Epoch')
+    plt.ylabel('Loss')
+    plt.legend()
+    plt.grid(True)
+
+    plt.tight_layout()
+    plt.show()
 
 
-def load_test_data():
+
+def load_test_data(DATA_DIR):
+
     # Paths
-    base_dir = "/data"
+    base_dir = f"{DATA_DIR}/dataset"
     test_dir = f"{base_dir}/test"
 
     # Rescale generator (no other augmentation here)
@@ -101,9 +133,40 @@ def load_test_data():
         shuffle=False
     )
 
-    print("Class names:", test_generator.class_indices.keys())
-
     return test_generator
+
+
+def classification_report_and_confusion_matrix(model, test_generator):
+    
+    # Get true labels and predictions
+    Y_true = test_generator.classes
+    Y_pred_probs = model.predict(test_generator)
+    Y_pred = np.argmax(Y_pred_probs, axis=1)
+
+    # Get class labels
+    class_labels = list(test_generator.class_indices.keys())
+
+    # Generate classification report
+    report = classification_report(Y_true, Y_pred, target_names=class_labels)
+    print("Classification Report:")
+    print(report)
+
+    # Generate confusion matrix
+    cm = confusion_matrix(Y_true, Y_pred)
+
+    # Plot confusion matrix as heatmap
+    plt.figure(figsize=(8, 6))
+    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
+                xticklabels=class_labels,
+                yticklabels=class_labels)
+
+    plt.title('Confusion Matrix')
+    plt.xlabel('Predicted Label')
+    plt.ylabel('True Label')
+
+    plt.tight_layout()
+    plt.show()
+
 
 
 def visualize_test_predictons(model):
@@ -143,73 +206,7 @@ def visualize_test_predictons(model):
     plt.show()
 
 
-def visualize_accuracy_loss():
 
-    # Load the saved history from file
-    history = pd.read_csv("training_log.csv")
-
-    plt.figure(figsize=(14, 5))
-
-    # Plot Accuracy
-    plt.subplot(1, 2, 1)
-    plt.plot(history['accuracy'], label='Train Accuracy', marker='o')
-    plt.plot(history['val_accuracy'], label='Val Accuracy', marker='o')
-    plt.title('Training vs Validation Accuracy')
-    plt.xlabel('Epoch')
-    plt.ylabel('Accuracy')
-    plt.legend()
-    plt.grid(True)
-
-    # Plot Loss
-    plt.subplot(1, 2, 2)
-    plt.plot(history['loss'], label='Train Loss', marker='o')
-    plt.plot(history['val_loss'], label='Val Loss', marker='o')
-    plt.title('Training vs Validation Loss')
-    plt.xlabel('Epoch')
-    plt.ylabel('Loss')
-    plt.legend()
-    plt.grid(True)
-
-    plt.tight_layout()
-
-    plt.savefig("/output/Training_History.png", dpi=300, bbox_inches='tight')
-    print(f"✅ Figure saved to output folder") 
-
-    plt.show()
-
-def classification_report(model, test_generator):
-    
-    # Get true labels and predictions
-    Y_true = test_generator.classes
-    Y_pred_probs = model.predict(test_generator)
-    Y_pred = np.argmax(Y_pred_probs, axis=1)
-
-    # Get class labels
-    class_labels = list(test_generator.class_indices.keys())
-
-    # Generate classification report
-    report = classification_report(Y_true, Y_pred, target_names=class_labels)
-    print("Classification Report:")
-    print(report)
-
-    # Generate confusion matrix
-    cm = confusion_matrix(Y_true, Y_pred)
-
-    # Plot confusion matrix as heatmap
-    plt.figure(figsize=(8, 6))
-    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
-                xticklabels=class_labels,
-                yticklabels=class_labels)
-
-    plt.title('Confusion Matrix')
-    plt.xlabel('Predicted Label')
-    plt.ylabel('True Label')
-    plt.tight_layout()
-
-    plt.savefig("/output/confusion_matrix.png", dpi=300, bbox_inches='tight')
-    print(f"✅ Figure saved to output folder") 
-
-    plt.show()
 
 
    
