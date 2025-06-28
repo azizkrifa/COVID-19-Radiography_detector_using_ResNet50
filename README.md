@@ -1,4 +1,4 @@
-# 🦠 COVID-19 Radiography Detector
+# 🦠 COVID-19-Radiography_detector_using_ResNet50
 
 A deep learning project for the **automated detection of COVID-19** from chest X-ray images using Convolutional Neural Networks (CNNs).
 
@@ -65,8 +65,8 @@ The goal is to assist radiologists and healthcare professionals in making quicke
 
 ### 📥 1. Clone the Repository
 ``` bash 
-    git clone https://github.com/azizkrifa/COVID-19-Radiography_detector.git
-    cd  COVID-19-Radiography_detector
+    git clone https://github.com/azizkrifa/COVID-19-Radiography_detector_using_ResNet50.git
+    cd  COVID-19-Radiography_detector_using_ResNet50
 
 ```
 
