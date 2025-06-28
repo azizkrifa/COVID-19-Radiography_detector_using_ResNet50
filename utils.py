@@ -169,7 +169,7 @@ def classification_report_and_confusion_matrix(model, test_generator):
 
 
 
-def visualize_test_predictons(model):
+def visualize_test_predictions(model):
     # Paths
     base_dir = "/data"
     test_dir = f"{base_dir}/test"
