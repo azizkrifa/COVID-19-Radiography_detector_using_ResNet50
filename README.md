@@ -81,19 +81,19 @@ The goal is to assist radiologists and healthcare professionals in making quicke
 
   Load and preprocess the dataset (including splitting and augmentation):
 
-    📄 Run: 1_data_preprocessing.ipynb
+    📄 Run: data_preprocessing.ipynb
 
   ####  🧠 3.2: Train the Model
 
   Train the model on the prepared dataset:
 
-    📄 Run: 2_training.ipynb
+    📄 Run: training.ipynb
     
   #### 📊 3.3: Evaluate the Model
 
   Evaluate model performance and visualize results:
 
-    📄 Run: 3_evaluation.ipynb
+    📄 Run: evaluation.ipynb
      
 ---
 
