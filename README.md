@@ -19,42 +19,52 @@ The goal is to assist radiologists and healthcare professionals in making quicke
 
 ## ⚙️ Features
 
-- ✅ Data preprocessing and augmentation
+- ✅ Data `preprocessing` and `augmentation`
 - ✅ Train/validation/test split using `splitfolders`
 - ✅ CNN model built on top of pre-trained architectures (`ResNet50`)
-- ✅ EarlyStopping and ModelCheckpoint callbacks for efficient training
-- ✅ Visualization of training/validation accuracy and loss
-- ✅ Final model export (`.h5`) and training history logging
-
-- ✅ Test set evaluation and confusion matrix visualization
+- ✅ `EarlyStopping` and `ModelCheckpoint` callbacks for efficient training.
+- ✅ Visualization of training / validation `accuracy` and `loss`.
+- ✅ Final model export (`.h5`) and `training history` logging.
+- ✅ Test set evaluation and `classification report` / `confusion matrix` visualization.
 
 ---
 
 ## 🗂 Dataset
 
 - **COVID-19 Radiography Database**
-  - Source: [Kaggle Dataset](https://www.kaggle.com/datasets/tawsifurrahman/covid19-radiography-database)
-  - Classes: `COVID-19`, `Normal`, `Viral Pneumonia`, `Lung Opacity`
-  - Preprocessed with resizing, normalization, and augmentation
+  - Source: [Kaggle Dataset](https://www.kaggle.com/datasets/tawsifurrahman/covid19-radiography-database).
+  - Classes: `COVID-19`, `Normal`, `Viral Pneumonia`, `Lung Opacity`.
+  - split into `train(70%)`, `val(20%)`, and `test(10%)` folders using **split-folders** library.
+  - Preprocessed with resizing, normalization, and augmentation.
+
+📝 **Note**:
+The original COVID-19 Radiography Database contains over `41,000 files`, including approximately `21,000 chest X-ray images` and an equal number of corresponding `segmentation masks`. However, since this project focuses solely on `image classification` and not segmentation or object detection, only the X-ray images are used in the dataset. The segmentation masks are excluded from the training pipeline.
+
+👉 You can access the **post-processed** dataset (ready to fit the model) used in this project here: [post-processed dataset](https://drive.google.com/drive/folders/1PAAzK57hLqxDldSSguqaG2s80R4yoHUr?usp=sharing)
 
 ---
 
-## 🧪 Model Architecture
+## 🧪 Model Setup
 
-- Base Model: `ResNet50` 
-- Custom Top Layers:
-  - `GlobalAveragePooling2D`
-  - Dense layers (e.g., 256 units + ReLU)
-  - Final output: `Dense(4, activation='softmax')`
-
+- **Base model**: `ResNet50` (pretrained on ImageNet, `include_top=False`).
+  
+- **Input size**: 224×224×3 (**RGB**).
+  
+- **Architecture**:
+  
+  - GlobalAveragePooling2D
+  - **Dense**(512, **ReLU**) + **BatchNormalization**.
+  - **Dense**(256, **ReLU**) + **BatchNormalization**.
+  - **Dense**(10, **Softmax**). `output layer`
+    
 ---
 
 ## 📊 Training Strategy
 
-- Optimizer: `Adam`
-- Loss: `Categorical Crossentropy`
-- Metrics: `Accuracy`
-- Epochs: Up to 50 with EarlyStopping (`patience=10`)
+- Optimizer: `Adam`(learning rate = 1e-5).
+- Loss: `Categorical Crossentropy`.
+- Metrics: `Accuracy`.
+- Epochs: Up to 50 with EarlyStopping (`patience=10`).
 - Callbacks:
   - `ModelCheckpoint`: saves best model (`best_model.h5`)
   - `EarlyStopping`: avoids overfitting and saves time
@@ -67,7 +77,6 @@ The goal is to assist radiologists and healthcare professionals in making quicke
 ``` bash 
     git clone https://github.com/azizkrifa/COVID-19-Radiography_detector_using_ResNet50.git
     cd  COVID-19-Radiography_detector_using_ResNet50
-
 ```
 
 ### 📦 2. Install Dependencies
@@ -81,19 +90,19 @@ The goal is to assist radiologists and healthcare professionals in making quicke
 
   Load and preprocess the dataset (including splitting and augmentation):
 
-    📄 Run: data_preprocessing.ipynb
+  📄 Run: `data_preprocessing.ipynb`
 
   ####  🧠 3.2: Train the Model
 
-  Train the model on the prepared dataset:
-
-    📄 Run: training.ipynb
+  Train the model on the prepared dataset: 
+  
+  📄 Run: `training.ipynb`
     
   #### 📊 3.3: Evaluate the Model
 
-  Evaluate model performance and visualize results:
-
-    📄 Run: evaluation.ipynb
+  Evaluate model performance and visualize results: 
+  
+  📄 Run: `evaluation.ipynb`
      
 ---
 
