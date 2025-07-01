@@ -35,9 +35,9 @@ The goal is to assist radiologists and healthcare professionals in making quicke
   - Source: [Kaggle Dataset](https://www.kaggle.com/datasets/tawsifurrahman/covid19-radiography-database).
   - Classes: `COVID-19`, `Normal`, `Viral Pneumonia`, `Lung Opacity`.
   - split into `train(70%)`, `val(20%)`, and `test(10%)` folders using **split-folders** library.
-  - Preprocessed with resizing, normalization, and augmentation.
+  - Preprocessed with resizing, normalization, and `augmentation(train set only)`.
  
-### 📊 Class Distribution :
+### 📊 Train set class Distribution :
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/5b098fe2-0684-4f94-9827-639f151b5f57" width="47%" height="300px" />
