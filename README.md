@@ -36,6 +36,16 @@ The goal is to assist radiologists and healthcare professionals in making quicke
   - Classes: `COVID-19`, `Normal`, `Viral Pneumonia`, `Lung Opacity`.
   - split into `train(70%)`, `val(20%)`, and `test(10%)` folders using **split-folders** library.
   - Preprocessed with resizing, normalization, and augmentation.
+ 
+### 📊 Class Distribution :
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/5b098fe2-0684-4f94-9827-639f151b5f57" width="47%" height="300px" />
+  <img src="https://github.com/user-attachments/assets/52d0ebca-9886-4c65-afec-2dd9bc56a022" width="47%" height="300px" />
+</p>
+
+
+
 
 📝 **Note**:
 The original COVID-19 Radiography Database contains over `41,000 files`, including approximately `21,000 chest X-ray images` and an equal number of corresponding `segmentation masks`. However, since this project focuses solely on `image classification` and not segmentation or object detection, only the X-ray images are used in the dataset. The segmentation masks are excluded from the training pipeline.
