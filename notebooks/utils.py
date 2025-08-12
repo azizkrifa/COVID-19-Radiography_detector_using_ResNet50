@@ -6,10 +6,11 @@ import seaborn as sns
 import os
 import random
 import numpy as np
+from collections import Counter
 
 
-def display_data_distribuation(path):
-   
+def display_data_distribution(path):
+
     train_counts = Counter([
         label for folder in os.listdir(path)
         if os.path.isdir(os.path.join(path, folder))
