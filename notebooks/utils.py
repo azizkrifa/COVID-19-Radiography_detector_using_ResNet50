@@ -1,4 +1,4 @@
-from tensorflow.keras.preprocessing.image import ImageDataGenerator ,load_img, img_to_array
+from tensorflow.keras.preprocessing.image import ImageDataGenerator ,load_img, img_to_array # type: ignore
 from sklearn.metrics import classification_report, confusion_matrix
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -30,8 +30,8 @@ def display_data_distribution(path):
 
 
 
-def load_data(DATA_DIR):
-    
+def load_data(DATA_DIR, batch_size):
+
     # Paths
     base_dir = f"{DATA_DIR}/dataset"
     train_dir = f"{base_dir}/train_augmented"
@@ -44,7 +44,7 @@ def load_data(DATA_DIR):
     train_generator = datagen.flow_from_directory(
         train_dir,
         target_size=(224, 224),
-        batch_size=32,
+        batch_size=batch_size,
         class_mode='categorical',
         shuffle=True
     )
@@ -53,7 +53,7 @@ def load_data(DATA_DIR):
     val_generator = datagen.flow_from_directory(
         val_dir,
         target_size=(224, 224),
-        batch_size=32,
+        batch_size=batch_size,
         class_mode='categorical',
         shuffle=False
     )
@@ -116,7 +116,7 @@ def visualize_accuracy_loss():
 
 
 
-def load_test_data(DATA_DIR):
+def load_test_data(DATA_DIR, batch_size=32):
 
     # Paths
     base_dir = f"{DATA_DIR}/dataset"
@@ -129,7 +129,7 @@ def load_test_data(DATA_DIR):
     test_generator = datagen.flow_from_directory(
         test_dir,
         target_size=(224, 224),
-        batch_size=32,
+        batch_size=batch_size,
         class_mode='categorical',
         shuffle=False
     )
